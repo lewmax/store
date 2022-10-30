@@ -47,7 +47,7 @@ class CartActorBloc extends Bloc<CartActorEvent, CartActorState> {
           final product = e.product;
           final prodId = product.id;
 
-          late Either<CartFailure, Unit> possibleFailure;
+          Either<CartFailure, Unit>? possibleFailure;
 
           if (!cartItemsMap.containsKey(prodId)) {
             final cartItem = CartItem(
@@ -91,32 +91,28 @@ class CartActorBloc extends Bloc<CartActorEvent, CartActorState> {
                 (_) => emit(const CartActorState.actionSuccess()),
           );
         },
-        removeFromCart: (e) {
+        removeFromCart: (e) async {
           emit(const CartActorState.actionInProgress());
-          cartWatcherBloc.state.maybeMap(
-            loadSuccess: (cartWatcherState) async {
-              final cartItemsMap = cartWatcherState.cart.cartItems;
-              final cartItem = e.cartItem;
-              final prodId = cartItem.prodId;
+          final cartItemsMap = cart.cartItems;
 
-              late Either<CartFailure, Unit> possibleFailure;
+          final cartItem = e.cartItem;
+          final prodId = cartItem.prodId;
 
-              if (cartItemsMap[prodId]!.quantity.getOrCrash() < 2) {
-                possibleFailure = await cartRepository.delete(prodId);
-              } else {
-                final cartItem = cartItemsMap[prodId]!.copyWith(
-                  quantity: Quantity(
-                    cartItemsMap[prodId]!.quantity.getOrCrash() - 1,
-                  ),
-                );
-                possibleFailure = await cartRepository.update(cartItem);
-              }
-              possibleFailure.fold(
+          Either<CartFailure, Unit>? possibleFailure;
+
+          if (cartItemsMap[prodId]!.quantity.getOrCrash() < 2) {
+            possibleFailure = await cartRepository.delete(prodId);
+          } else {
+            final cartItem = cartItemsMap[prodId]!.copyWith(
+              quantity: Quantity(
+                cartItemsMap[prodId]!.quantity.getOrCrash() - 1,
+              ),
+            );
+            possibleFailure = await cartRepository.update(cartItem);
+          }
+          possibleFailure.fold(
                 (f) => emit(CartActorState.actionFailure(f)),
                 (_) => emit(const CartActorState.actionSuccess()),
-              );
-            },
-            orElse: () => null,
           );
         },
         removeAll: (e) async {
