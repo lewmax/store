@@ -2,6 +2,8 @@
 
 Shop E-commerce App
 
+youtube: https://youtu.be/KSyIfexzwO4
+
 State Management:
 - Bloc + freezed
 - Cubit
