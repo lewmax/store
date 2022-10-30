@@ -1,17 +1,36 @@
 # multi_store
 
-A new Flutter project.
+Shop E-commerce App
 
-## Getting Started
+State Management:
+- Bloc + freezed
+- Cubit
+- Flutter Hooks
 
-This project is a starting point for a Flutter application.
+Pattern - DDD (Domain Driven Design)
 
-A few resources to get you started if this is your first Flutter project:
+Services used:
+- Firebase (Authentication, Firestore, Storage)
+- Stripe Payment
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Requirements:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-"# store" 
+Registration:
+- register with email, password, image, name
+- form validation
+
+Sign In:
+- sign in with email, password
+- form validation
+
+User:
+- 2 types of user (customer, supplier)
+- ability to view/change account info ()
+
+Product:
+
+Wishlist:
+
+Cart:
+
+Orders:
