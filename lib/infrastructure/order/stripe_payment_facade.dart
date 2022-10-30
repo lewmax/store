@@ -33,7 +33,9 @@ class StripePaymentFacade implements IPaymentFacade {
       await Stripe.instance.initPaymentSheet(
         paymentSheetParameters: SetupPaymentSheetParameters(
           paymentIntentClientSecret: json['client_secret'],
-          applePay: const PaymentSheetApplePay(merchantCountryCode: 'us'),
+          applePay: const PaymentSheetApplePay(
+            merchantCountryCode: 'us',
+          ),
           googlePay: const PaymentSheetGooglePay(
             testEnv: true,
             merchantCountryCode: 'us',
