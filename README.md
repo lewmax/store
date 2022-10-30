@@ -12,7 +12,8 @@ Pattern - DDD (Domain Driven Design):
 - Infrastructure (DTOs, Repositories implementation, Facades implementation)
 - Application (Bloc, Cubit)
 - Presentation (Screens, Widgets, Routes)
-Plus Dependency Injection - GetIt
+ 
+Dependency Injection - GetIt
 
 Services used:
 - Firebase (Authentication, Firestore, Storage);
@@ -40,6 +41,7 @@ Product:
 - Search products
 - Image gallery
 - Check store of product
+- Decrease quantity once ordered
 
 Wishlist:
 - Add to wishlist
